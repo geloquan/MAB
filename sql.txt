@@ -1,0 +1,18 @@
+directories:
+  laptop:
+    C:\Program Files\postgresql\pgsql\bin
+
+export:
+  pg_dump -U root -d MABDIR > -f "H:\Programming\MAB_DIRECTORY\schema.sql"
+import:
+  laptop:
+    psql -U postgres -c "drop DATABASE MABDIR;"
+    psql -U postgres -c "CREATE DATABASE MABDIR;"
+    psql -U postgres -d mabdir -f "C:\programming\MAB_DIRECTORY\schema.sql"
+  pc:
+    psql -p 3320 -U postgres -c "drop DATABASE MABDIR;"
+    psql -p 3320 -U postgres -c "CREATE DATABASE MABDIR;"
+    psql -p 3320 -U postgres -d mabdir -f "H:\Programming\MAB_DIRECTORY\schema.sql"
+    
+connect:
+  psql -U root -d mabdir

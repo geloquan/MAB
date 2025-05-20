@@ -1,0 +1,5 @@
+<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="#000000" viewBox="3 7 18 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+style="transform: rotate(90deg);"
+>
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+</svg>
