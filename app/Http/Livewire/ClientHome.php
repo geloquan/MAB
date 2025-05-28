@@ -25,7 +25,7 @@ class ClientHome extends Component {
   public $cacheSearchSpecializationNameSelect = '';
   public $cacheSearchSubSpecializationNameSelect = '';
   public $cacheSearchDayOfWeekSelect = '';
-  public $cacheSearchTimeSelect = '';
+  public $cacheSearchTimeSelect = 'anytime';
 public $cacheSearchActiveOnly = false;
 
   public $hmos = [];
@@ -85,7 +85,7 @@ public $cacheSearchActiveOnly = false;
    *
    * @return array
    */
-  public function filterSchedule(string $searchTimeSelect, string $dayOfWeek, array $doctor_resources) {
+  public function filterSchedule(string $searchTimeSelect, array $doctor_resources) {
     $schedule = array_filter($doctor_resources, function($doctor) use ($searchTimeSelect) {
       if ($searchTimeSelect === 'anytime' || $searchTimeSelect === '') {
         return true;
@@ -186,7 +186,7 @@ public $cacheSearchActiveOnly = false;
     $this->searchSpecializationNameSelect = null;
     $this->searchHmoNameSelect = null;
     $this->searchDayOfWeekSelect = null;
-    $this->searchTimeSelect = '';
+    $this->searchTimeSelect = 'anytime';
     $this->searchActiveOnly = false;
     $this->filtered_doctors = [];
   }
@@ -211,9 +211,9 @@ public $cacheSearchActiveOnly = false;
         return $query->where('day_of_week', 'LIKE', '%' . Str::lower($this->cacheSearchDayOfWeekSelect) . '%');
       });
 
-      if ($this->searchTimeSelect) {
+      if ($this->cacheSearchTimeSelect) {
         $potentialDoctors = $query->get();
-        $filtered_doctors = $this->filterSchedule($this->searchTimeSelect, $this->searchDayOfWeekSelect, $potentialDoctors->toArray());
+        $filtered_doctors = $this->filterSchedule($this->cacheSearchTimeSelect, $potentialDoctors->toArray());
         $this->filtered_doctors = $filtered_doctors;
         $filteredDoctorIds = collect($filtered_doctors)->pluck('doctor_id')->toArray();
 
